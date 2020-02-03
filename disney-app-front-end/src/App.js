@@ -8,10 +8,10 @@ import useForm from "./hooks/useForm"
 
 
 function App() {
-    const [{email,password},handleChange] =useForm({
-      email:"",
-      password:""
-    });
+  const [{email, password }, handleChange] = useForm({
+    email: "",
+    password: ""
+  });
   const login = event =>{
       event.preventDefault();
   }
@@ -22,18 +22,20 @@ function App() {
     <h1>The Happiest Place on Earth for Everyone</h1>
       <form>
         <label htmlFor="email">Email
-          <input 
-            type="email"
-            id="email"
-            value={email}
-            onChange = {handleChange} 
-            onBlur = {handleChange} 
-            />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={handleChange}
+        />
         </label>
         <label htmlFor="password">Password
           <input 
             type="password"
             id="password"
+            name="password"
             value={password}
             onChange = {handleChange} 
             onBlur = {handleChange} 
