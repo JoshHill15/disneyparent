@@ -23,6 +23,7 @@ function App() {
     <h1>The Happiest Place on Earth for Everyone</h1>
       <form onSubmit ={event =>{
         event.preventDefault();
+
       }}>
         <label htmlFor="email">Email
         <input
