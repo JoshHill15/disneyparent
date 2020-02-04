@@ -7,6 +7,10 @@ import axios from "axios";
 
 
 
+
+
+
+
 const LoginSchema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required()
@@ -14,7 +18,10 @@ const LoginSchema = yup.object().shape({
 
 
 
-
+function OnSubmit(data){
+    console.log(data)
+  
+}
 
 
 const LoginForm = () => {
@@ -22,21 +29,12 @@ const LoginForm = () => {
     const {register,handleSubmit,errors} = useForm({
         validationSchema: LoginSchema
     })
-    const onSubmit = data =>{
-        console.log(data)
-        useEffect(() =>{
-            axios.post("https://sqlite3-test.herokuapp.com/api/auth/login",data)
-            .then(response =>{
-                console.log(response)
-            })
-            .catch(error =>{
-                console.log(error)
-            })
-        })
-    }
+ 
 
     return (
-        <form onSubmit = {handleSubmit(onSubmit)}>
+        <div className="loginWrapper">
+        <h1>The Happiest Place on Earth for Everyone</h1>
+        <form onSubmit = {handleSubmit(OnSubmit)}>
             <label htmlFor="Email">Email
                 <input 
                     type="text" 
@@ -53,5 +51,7 @@ const LoginForm = () => {
             </label>
             <button>Sign In</button>
         </form>);
+        </div>
+    )
 };
 export default LoginForm;
