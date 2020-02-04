@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
+import axios from "axios";
 
 
 
@@ -23,6 +24,15 @@ const LoginForm = () => {
     })
     const onSubmit = data =>{
         console.log(data)
+        useEffect(() =>{
+            axios.post("https://sqlite3-test.herokuapp.com/api/auth/login",data)
+            .then(response =>{
+                console.log(response)
+            })
+            .catch(error =>{
+                console.log(error)
+            })
+        })
     }
 
     return (
