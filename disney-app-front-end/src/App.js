@@ -11,11 +11,12 @@ function App() {
     const [isAuth, setIsAuth] = useState(false)
     const [userData, setUserData] = useState({
       email:"billnye@yahoo.com",
-      password:"bill"
+      password:"bill",
+      posts:["Hello"]
     })
 
     console.log(isAuth);
-    console.log(`userData: ${userData.email}, ${userData.password}`)
+    console.log(`userData: ${userData.email}, ${userData.password},${userData.posts}`)
   return (
     <>
     {isAuth?

@@ -25,16 +25,15 @@ const LoginSchema = yup.object().shape({
 const LoginForm = (props) => {
 
     const mockData = DummyData;
-
     const {register,handleSubmit,errors} = useForm({
         validationSchema: LoginSchema
     })
     
     const OnSubmit= data =>{
-        console.log(`submitting ${data.email, data.password}`)
+        console.log(`submitting`)
         console.log(mockData.email,mockData.password)
         if(data.email===mockData.email && data.password===mockData.password){
-            props.setUserData(data);
+            props.setUserData(mockData);
             props.setIsAuth(true);
         }
       
