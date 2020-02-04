@@ -1,25 +1,55 @@
 import React from 'react';
 import logo from './logo.svg';
+import {Route,Link} from "react-router-dom"
 import './App.css';
 
+import Header from "./components/header";
+import useForm from "./hooks/useForm"
+
+
 function App() {
+ 
+  const [{email, password }, handleChange] = useForm({
+    email: "",
+    password: ""
+  });
+  const login = event =>{
+      event.preventDefault();
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header/>
+    <h1>The Happiest Place on Earth for Everyone</h1>
+      <form onSubmit ={event =>{
+        event.preventDefault
+      }}>
+        <label htmlFor="email">Email
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={handleChange}
+        />
+        </label>
+        <label htmlFor="password">Password
+          <input 
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange = {handleChange} 
+            onBlur = {handleChange} 
+            />
+        </label>
+        <button> Sign In </button>
+        <button> Sign Up </button>
+        
+      </form>
+    </>
   );
 }
 
