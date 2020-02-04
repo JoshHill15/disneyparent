@@ -1,14 +1,20 @@
 import React from "react";
-import useForm from "../hooks/useForm"
+import {useForm} from "react-hook-form"
+import * as yup from "yup"
+
 
 export default function Signup(){
-    const initialState = {
-        email:"",
-        password:"",
-        numberOfKids:0
-    }
 
-    const [values,handleChange] = useForm(initialState)
+
+    const SignUpSchema = yup.object().shape({
+        userName:yup.string().required(),
+        email:yup.string().email().required(),
+        password:yup
+        .string()
+        .required()
+        .matches(/(?=.*[0-9]))/, "Password should contain a number")
+        .min(8,"Requires 8 or more characters"),
+    }) 
 
 
     return(

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Route,Redirect} from "react-router-dom"
+import {Route,Redirect,Link} from "react-router-dom"
 import './App.css';
 
-import Header from "./components/header";
+import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 import LoginForm from "./components/LoginForm";
 
@@ -23,13 +23,16 @@ function App() {
       <Redirect to="/profile"/>:
       <Redirect to="/login"/>}
 
+
     <Route path="/login">
       <LoginForm setUserData={setUserData}setIsAuth={setIsAuth}/>
     </Route>
     <Route path="/profile">
       <Profile user={userData}/>
     </Route>
-    <button onClick ={() => setIsAuth(true)}>Login</button>
+    <Route path="/signup/" component={SignUp}/>
+    <Link to="/signup"> <button>Sign Up</button></Link>
+  
       
         
 
