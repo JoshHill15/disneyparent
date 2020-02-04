@@ -8,18 +8,27 @@ import LoginForm from "./components/LoginForm";
 
 
 function App() {
-    let isAuth = false;
+    const [isAuth, setIsAuth] = useState(false)
+    const [userData, setUserData] = useState({
+      email:"billnye@yahoo.com",
+      password:"bill"
+    })
 
-
+    console.log(isAuth);
+    console.log(`userData: ${userData.email}, ${userData.password}`)
   return (
     <>
     {isAuth?
       <Redirect to="/profile"/>:
       <Redirect to="/login"/>}
 
-    <Route path="/login"><LoginForm/></Route>
-    <Route path="/profile" component={Profile}/>
-    <button onClick ={() => isAuth=true}>Login{isAuth}</button>
+    <Route path="/login">
+      <LoginForm setUserData={setUserData}setIsAuth={setIsAuth}/>
+    </Route>
+    <Route path="/profile">
+      <Profile user={userData}/>
+    </Route>
+    <button onClick ={() => setIsAuth(true)}>Login</button>
       
         
 

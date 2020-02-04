@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
+import {DummyData} from "../dummyData"
 
 
 
@@ -15,21 +16,29 @@ const LoginSchema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required()
   })
-
-
-
-function OnSubmit(data){
-    console.log(data)
   
-}
 
 
-const LoginForm = () => {
+
+
+
+const LoginForm = (props) => {
+
+    const mockData = DummyData;
 
     const {register,handleSubmit,errors} = useForm({
         validationSchema: LoginSchema
     })
- 
+    
+    const OnSubmit= data =>{
+        console.log(`submitting ${data.email, data.password}`)
+        console.log(mockData.email,mockData.password)
+        if(data.email===mockData.email && data.password===mockData.password){
+            props.setUserData(data);
+            props.setIsAuth(true);
+        }
+      
+    }
 
     return (
         <div className="loginWrapper">
@@ -50,7 +59,7 @@ const LoginForm = () => {
                 {errors.password && <p>{errors.password.message}</p>}
             </label>
             <button>Sign In</button>
-        </form>);
+        </form>
         </div>
     )
 };
