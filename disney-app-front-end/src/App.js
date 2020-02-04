@@ -1,54 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import {Route,Link} from "react-router-dom"
+import React, {useState} from 'react';
+import {Route,Redirect,Link} from "react-router-dom"
 import './App.css';
 
-import Header from "./components/header";
-import useForm from "./hooks/useForm"
+import SignUp from "./components/SignUp";
+import Profile from "./components/Profile";
+import LoginForm from "./components/LoginForm";
 
 
 function App() {
- 
-  const [{email, password }, handleChange] = useForm({
-    email: "",
-    password: ""
-  });
-  const login = event =>{
-      event.preventDefault();
-  }
-  
+    const [isAuth, setIsAuth] = useState(false)
+    const [userData, setUserData] = useState({
+      email:"billnye@yahoo.com",
+      password:"bill",
+      posts:["Hello"]
+    })
+
+    console.log(isAuth);
+    console.log(`userData: ${userData.email}, ${userData.password},${userData.posts}`)
   return (
     <>
-    <Header/>
-    <h1>The Happiest Place on Earth for Everyone</h1>
-      <form onSubmit ={event =>{
-        event.preventDefault
-      }}>
-        <label htmlFor="email">Email
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="E-mail"
-          value={email}
-          onChange={handleChange}
-        />
-        </label>
-        <label htmlFor="password">Password
-          <input 
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange = {handleChange} 
-            onBlur = {handleChange} 
-            />
-        </label>
-        <button> Sign In </button>
-        <button> Sign Up </button>
+    {isAuth?
+      <Redirect to="/profile"/>:
+      <Redirect to="/login"/>}
+
+
+    <Route path="/login">
+      <LoginForm setUserData={setUserData}setIsAuth={setIsAuth}/>
+    </Route>
+    <Route path="/profile">
+      <Profile user={userData}/>
+    </Route>
+    <Route path="/signup/" component={SignUp}/>
+    <Link to="/signup"> <button>Sign Up</button></Link>
+  
+      
         
-      </form>
+
+ 
     </>
   );
 }
