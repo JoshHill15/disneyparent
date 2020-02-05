@@ -1,16 +1,25 @@
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
-
 import {DummyData} from "../dummyData"
-import { connect } from 'react-redux';
-import { login } from '../actions';
+
+
+
+
+
+
+
 
 const LoginSchema = yup.object().shape({
     username: yup.string().required(),
     password: yup.string().required()
   })
   
+
+
+
+
+
 const LoginForm = (props) => {
 
     const mockData = DummyData;
@@ -18,26 +27,17 @@ const LoginForm = (props) => {
     const {register,handleSubmit,errors} = useForm({
         validationSchema: LoginSchema
     })
-    
-
-    // const [isAuth,setIsAuth] = useState(false);
-
-    // const [userData, setUserData] = useState({
-    //     username:"",
-    //     password:"",
-    //     comments:[]
-    // })
-
+ 
+    //Submit function for login form takes the form submitted for data, checks it against dummydata/ or API get data,
     const onSubmit= data =>{
-        /*console.log("submitting")
+        console.log("submitting")
         if(data.username===mockData.username && data.password===mockData.password){
             props.setUserData(mockData);
             props.setIsAuth(true);
-        }*/
-      login(data);
+        }
+      
     }
 
-    //Documentation says that login information is username and password
     return (
         <div className="loginWrapper">
         <h1>The Happiest Place on Earth for Everyone</h1>
@@ -62,11 +62,7 @@ const LoginForm = (props) => {
         </form>
         </div>
     )
-
-    const mapStateToProps = state => {
-        return (
-            state;
-        )
-    }
 };
-export default connect(mapStateToProps, {login})(LoginForm);
+
+
+export default LoginForm;
