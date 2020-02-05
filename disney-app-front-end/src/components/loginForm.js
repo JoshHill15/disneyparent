@@ -28,13 +28,14 @@ const LoginForm = (props) => {
     //     comments:[]
     // })
 
-    const onSubmit= data =>{
+    const onSubmit = data =>{
         /*console.log("submitting")
         if(data.username===mockData.username && data.password===mockData.password){
             props.setUserData(mockData);
             props.setIsAuth(true);
         }*/
-      login(data);
+        props.login(data);
+        props.history.push('/profile')
     }
 
     //Documentation says that login information is username and password
@@ -61,15 +62,13 @@ const LoginForm = (props) => {
             <button>Sign In</button>
         </form>
         </div>
-    )
-
-    
+    );
 };
 
 const mapStateToProps = state => {
     return (
         state
-    )
+    );
 };
 
 export default connect(mapStateToProps, {login})(LoginForm);
