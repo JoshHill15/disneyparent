@@ -1,6 +1,6 @@
 export const DummyData =
     {
-        email:"example@example.com",
+        username:"example",
         password: "example",
         posts:[{
             title:"looking for more",
