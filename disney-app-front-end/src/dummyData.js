@@ -1,13 +1,14 @@
 export const DummyData =
     {
         username:"example",
+        name:"example",
         password: "example",
         posts:[{
             title:"looking for more",
-            location:"Matterhorn"
+            content:"Matterhorn"
 
         },{
             title:"Need Nanny",
-            location:"It's a small world afterall"
+            content:"It's a small world afterall"
         }]
     }

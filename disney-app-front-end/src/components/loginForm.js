@@ -11,6 +11,11 @@ const LoginSchema = yup.object().shape({
     password: yup.string().required()
   })
   
+
+
+
+
+
 const LoginForm = (props) => {
 
     //const mockData = DummyData;
@@ -18,7 +23,7 @@ const LoginForm = (props) => {
     const {register,handleSubmit,errors} = useForm({
         validationSchema: LoginSchema
     })
-    
+   
 
     // const [isAuth,setIsAuth] = useState(false);
 
@@ -36,9 +41,9 @@ const LoginForm = (props) => {
         }*/
         props.login(data);
         props.history.push('/profile')
+
     }
 
-    //Documentation says that login information is username and password
     return (
         <div className="loginWrapper">
         <h1>The Happiest Place on Earth for Everyone</h1>
@@ -62,6 +67,7 @@ const LoginForm = (props) => {
             <button>Sign In</button>
         </form>
         </div>
+
     );
 };
 
