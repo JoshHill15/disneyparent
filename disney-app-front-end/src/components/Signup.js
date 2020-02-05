@@ -1,9 +1,11 @@
 import React from "react";
-import {useForm} from "react-hook-form"
-import * as yup from "yup"
+import {useForm} from "react-hook-form";
+import * as yup from "yup";
+import { connect } from 'react-redux';
+import { registerUser } from '../actions';
 
 
-export default function Signup(){
+const function Signup = () => {
 
 
     const SignUpSchema = yup.object().shape({
@@ -16,7 +18,7 @@ export default function Signup(){
         .min(8,"Requires 8 or more characters"),
     }) 
 
-
+//Form needs to take input so it matches the shape of the expected user object
     return(
         <div>
         <h1>Join our Family</h1>
@@ -25,4 +27,12 @@ export default function Signup(){
         </form>
         </div>
     )
-}
+
+    const mapStateToProps = state => {
+        return {
+            state
+        }
+    };
+};
+
+export default connect(mapStateToProps, {registerUser})(Signup);

@@ -21,10 +21,10 @@ export const MESSAGE_EDIT_START = 'MESSAGE_EDIT_START';
 export const MESSAGE_EDIT_SUCCESS = 'MESSAGE_EDIT_SUCCESS';
 export const MESSAGE_EDIT_FAILURE = 'MESSAGE_EDIT_FAILURE';
 
-export const register = userData => dispatch => {
+export const registerUser = userData => dispatch => {
     dispatch({type: USER_REGISTER_START})
     axios
-        .get('https://sqlite3-test.herokuapp.com/api/auth/register')
+        .get('https://backendci-disneyparents.herokuapp.com/api/auth/register', userData)
         .then(response => {
             dispatch({type: USER_REGISTER_SUCCESS});
             localStorage.setItem('token', response.data.payload);
@@ -38,7 +38,7 @@ export const register = userData => dispatch => {
 export const login = userData => dispatch => {
     dispatch({type: USER_LOGIN_START})
     axiosWithAuth()
-        .get('/api/auth/login')
+        .get('/api/auth/login', userData)
         .then(response => {
             dispatch({type: USER_LOGIN_SUCCESS});
             localStorage.setItem('token', response.data.payload);
@@ -48,3 +48,9 @@ export const login = userData => dispatch => {
             console.log('Error', error);
         });
 };
+
+export const getPosts = () => dispatch => {
+    dispatch({type: MESSAGE_RETREIVAL_START});
+    axiosWithAuth()
+        .get('/api/user')
+}

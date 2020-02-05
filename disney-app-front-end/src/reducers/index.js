@@ -20,21 +20,38 @@ const initialState = {
     isLoading: false,
     isLoggedIn: false,
     user: {
-        firstName:'',
-        lastName:'',
+        username: '',
         password:'',
+        name:'',
+        email: '',
+        role: '',
+        phone: '',
         noOfChildren:'',
         location:'',
-        role: ''
-    },
-    posts: {
         
-    }
+    },
+    posts: []
 };
 
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
-        
+        case USER_LOGIN_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case USER_LOGIN_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                isLoggedIn: true
+            }
+        case USER_LOGIN_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                isLoggedIn: false
+            }
         default: 
             return state
     }
