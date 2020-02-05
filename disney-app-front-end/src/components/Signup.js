@@ -15,11 +15,11 @@ const  SignUp = () => {
         .string()
         .required()
         .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, "Password should contain a number")
-        .minLength(8,"Requires 8 or more characters"),
+        .min(8,"Requires 8 or more characters"),
         location:yup.string().required(),
         role:yup.string().required("You must select a Role"),
         noOfChildren:yup.number().moreThan(0).positive(),
-        phone:yup.number().minLength(10,"You must enter a valid Phone Number")
+        phone:yup.number().min(10,"You must enter a valid Phone Number")
 
 
         
