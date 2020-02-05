@@ -1,4 +1,4 @@
-import React,  {useState,useEffect} from "react";
+import React from "react";
 import {useForm} from "react-hook-form"
 import * as yup from "yup"
 import axios from "axios";
@@ -97,17 +97,15 @@ export default function Signup(){
                     id="caregiver"
                 />
                 {errors.role && <p>{errors.role.message}</p>}
-                    {/* {document.getElementById("parent").checked?
-                        <>
                         <label htmlFor="numberOfChildren">Number of children</label>
                         <input 
                             type="text" 
                             name="numberOfChildren" 
                             ref={register} 
                             placeholder="numberOfChildren"/>
-                        </>:null}
+                        
                 {errors.numberOfChildren && <p>{errors.numberOfChildren.message}</p>}
-                        <label htmlFor="phone">Phone Number</label> */}
+                        <label htmlFor="phone">Phone Number</label>
                         
                         <input 
                             type="text" 

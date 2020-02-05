@@ -1,8 +1,6 @@
-import React, {useState,useEffect} from 'react';
-import { Link } from "react-router-dom";
+import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 import * as yup from "yup";
-import axios from "axios";
 import {DummyData} from "../dummyData"
 
 
@@ -13,7 +11,7 @@ import {DummyData} from "../dummyData"
 
 
 const LoginSchema = yup.object().shape({
-    email: yup.string().email().required(),
+    username: yup.string().required(),
     password: yup.string().required()
   })
   
@@ -30,10 +28,17 @@ const LoginForm = (props) => {
         validationSchema: LoginSchema
     })
     
-    const OnSubmit= data =>{
-        console.log(`submitting`)
-        console.log(mockData.email,mockData.password)
-        if(data.email===mockData.email && data.password===mockData.password){
+    // const [isAuth,setIsAuth] = useState(false);
+
+    // const [userData, setUserData] = useState({
+    //     username:"",
+    //     password:"",
+    //     comments:[]
+    // })
+
+    const onSubmit= data =>{
+        console.log("submitting")
+        if(data.username===mockData.username && data.password===mockData.password){
             props.setUserData(mockData);
             props.setIsAuth(true);
         }
@@ -43,18 +48,20 @@ const LoginForm = (props) => {
     return (
         <div className="loginWrapper">
         <h1>The Happiest Place on Earth for Everyone</h1>
-        <form onSubmit = {handleSubmit(OnSubmit)}>
-            <label htmlFor="Email">Email
+        <form onSubmit = {handleSubmit(onSubmit)}>
+            <label htmlFor="username">Username
                 <input 
                     type="text" 
-                    name="email" 
+                    name="username" 
+                    id="username"
                     ref={register}/>
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.username && <p>{errors.username.message}</p>}
             </label>
             <label htmlFor="password">password
                 <input 
                     type="password" 
                     name="password" 
+                    id="password"
                     ref={register}/>
                 {errors.password && <p>{errors.password.message}</p>}
             </label>
