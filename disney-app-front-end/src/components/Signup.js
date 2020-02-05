@@ -5,7 +5,7 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import { registerUser } from '../actions';
 
-const function Signup = () => {
+const Signup = () => {
 
 
   const SignUpSchema = yup.object().shape({
@@ -123,11 +123,13 @@ const function Signup = () => {
         </div>
     )
 
-    const mapStateToProps = state => {
-        return {
-            state
-        }
-    };
+    
+};
+
+const mapStateToProps = state => {
+    return {
+        state
+    }
 };
 
 export default connect(mapStateToProps, {registerUser})(Signup);

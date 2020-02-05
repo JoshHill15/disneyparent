@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Route,Redirect,Link} from "react-router-dom"
 import './App.css';
 
-import SignUp from "./components/SignUp";
+import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import LoginForm from "./components/LoginForm";
 
@@ -30,7 +30,7 @@ function App() {
     <Route path="/profile">
       <Profile user={userData}/>
     </Route>
-    <Route path="/signup/" component={SignUp}/>
+    <Route path="/signup/" component={Signup}/>
     <Link to="/signup"> <button>Sign Up</button></Link>
   
       

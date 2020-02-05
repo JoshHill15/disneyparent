@@ -63,10 +63,13 @@ const LoginForm = (props) => {
         </div>
     )
 
-    const mapStateToProps = state => {
-        return (
-            state;
-        )
-    }
+    
 };
+
+const mapStateToProps = state => {
+    return (
+        state
+    )
+};
+
 export default connect(mapStateToProps, {login})(LoginForm);
