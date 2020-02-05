@@ -1,13 +1,14 @@
-import React,  {useState,useEffect} from "react";
-import {useForm} from "react-hook-form"
-import * as yup from "yup"
-import axios from "axios";
+import React from "react";
+import {useForm} from "react-hook-form";
+import * as yup from "yup";
+import { connect } from 'react-redux';
+import { registerUser } from '../actions';
 
 
+const function Signup = () => {
 
-export default function Signup(){
 
-    const SignUpSchema = yup.object().shape({
+  const SignUpSchema = yup.object().shape({
         userName:yup.string().required(),
         email:yup.string().email().required(),
         password:yup
@@ -23,6 +24,8 @@ export default function Signup(){
     });
     const createUser = event =>{
 
+
+
         axios
             .post('https://backendci-disneyparents.herokuapp.com/api/users/register',event)
             .then(response=>{
@@ -32,6 +35,7 @@ export default function Signup(){
                 console.log(error)
             })
     }
+
 
     return(
         <div>
@@ -120,4 +124,12 @@ export default function Signup(){
             </form>
         </div>
     )
-}
+
+    const mapStateToProps = state => {
+        return {
+            state
+        }
+    };
+};
+
+export default connect(mapStateToProps, {registerUser})(Signup);
