@@ -1,5 +1,6 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
+import { withRouter } from 'react-router-dom';
 import * as yup from "yup";
 
 //import {DummyData} from "../dummyData"
@@ -11,12 +12,9 @@ const LoginSchema = yup.object().shape({
     password: yup.string().required()
   })
   
-
-
-
-
-
 const LoginForm = (props) => {
+
+   
 
     //const mockData = DummyData;
 
@@ -40,7 +38,8 @@ const LoginForm = (props) => {
             props.setIsAuth(true);
         }*/
         props.login(data);
-        props.history.push('/profile')
+        props.history.push('/profile');
+        
 
     }
 
@@ -77,4 +76,4 @@ const mapStateToProps = state => {
     );
 };
 
-export default connect(mapStateToProps, {login})(LoginForm);
+export default withRouter(connect(mapStateToProps, {login})(LoginForm));

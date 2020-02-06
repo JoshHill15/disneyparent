@@ -39,7 +39,14 @@ const initialState = {
         noOfChildren:'',
         location:''
     },
-    posts: []
+    posts: [
+        {
+            id: 0,
+            title: 'No Posts',
+            content: 'N/A',
+            postedBy: 'N/A'
+        }
+    ]
 };
 
 export const reducer = (state = initialState, action) => {

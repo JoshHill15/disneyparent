@@ -36,8 +36,8 @@ export const MESSAGE_DELETE_FAILURE = 'MESSAGE_DELETE_FAILURE';
 
 export const registerUser = userData => dispatch => {
     dispatch({type: USER_REGISTER_START})
-    axios
-        .get('https://backendci-disneyparents.herokuapp.com/api/auth/register', userData)
+    axiosWithAuth()
+        .post('/api/users/register', userData)
         .then(response => {
             dispatch({type: USER_REGISTER_SUCCESS});
             localStorage.setItem('token', response.data.payload);
@@ -98,7 +98,7 @@ export const postMessage = message => dispatch => {
             dispatch({type: MESSAGE_POST_SUCCESS})
         })
         .catch(error => {
-            dispatch({type: MESSAGE_POST_FAILURE, payload: error.data})
+            dispatch({type: MESSAGE_POST_FAILURE, payload: error})
         })
 }
 
