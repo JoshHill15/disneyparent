@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { push } from 'react-router-redux';
 
@@ -115,12 +114,13 @@ export const updateMessage = (messageID, newMessage) => dispatch => {
         })
 };
 
-export const deleteMessage = messageID => dispatch => {
+export const deleteMessage = (messageID) => dispatch => {
     dispatch({type: MESSAGE_DELETE_START})
+    console.log(messageID)
     axiosWithAuth()
-        .put(`/api/posts/${messageID}`)
+        .delete(`/api/posts/${messageID}`)
         .then(response => {
-            response.log(response.data)
+            console.log(response.data)
             dispatch({type: MESSAGE_DELETE_SUCCESS})   
         })       
         .catch(error => {

@@ -14,9 +14,6 @@ import  {
     MESSAGE_POST_START,
     MESSAGE_POST_SUCCESS,
     MESSAGE_POST_FAILURE,
-    MESSAGE_RETREIVAL_START,
-    MESSAGE_RETREIVAL_SUCCESS,
-    MESSAGE_RETREIVAL_FAILURE,
     MESSAGE_EDIT_START,
     MESSAGE_EDIT_SUCCESS,
     MESSAGE_EDIT_FAILURE,
@@ -178,9 +175,6 @@ export const reducer = (state = initialState, action) => {
                 isLoading: false,
                 error: action.payload
             }
-        case MESSAGE_RETREIVAL_START:
-        case MESSAGE_RETREIVAL_SUCCESS: //update posts
-        case MESSAGE_RETREIVAL_FAILURE:
         default: 
             return state
     }

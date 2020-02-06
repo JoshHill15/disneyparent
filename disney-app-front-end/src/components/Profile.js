@@ -4,7 +4,7 @@ import {useRouteMatch} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import { connect } from 'react-redux';
 import PostForm from "./PostForm";
-import { getUserData } from '../actions';
+import { getUserData, deleteMessage } from '../actions';
 
 
 const Profile = props => {
@@ -15,8 +15,9 @@ const Profile = props => {
     },[]);
 
     const { path, url } = useRouteMatch();
-    const [showPostForm,setShowPostForm] = useState(false)
-    
+    const [showPostForm,setShowPostForm] = useState(false);
+
+       
     return(
         <div className="profile__info">
             <Header/>
@@ -30,6 +31,7 @@ const Profile = props => {
                         <h2>{post.title}</h2>
                         <p>{post.contents}</p>
                         <p>Posted by: {post.postedBy}</p>
+                        <button>Edit</button><button onClick={() => props.deleteMessage(post.id)}>Delete</button>
                     </div>
                 )
             }):<p>No current requests</p>}
@@ -46,4 +48,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {getUserData})(Profile);
+export default connect(mapStateToProps, {getUserData, deleteMessage})(Profile);
