@@ -1,10 +1,12 @@
 import React from "react";
 import {useForm} from "react-hook-form";
+import { connect } from 'react-redux';
+import { updateUserData } from '../actions';
 
 
 
 
-const  Settings = (props) => {
+const Settings = (props) => {
 
 
     const settingsSchema = yup.object().shape({
@@ -27,7 +29,7 @@ const  Settings = (props) => {
           validationSchema: settingsSchema
       });
       const updateUser = event =>{
-          console.log("submitting")
+          /*console.log("submitting")
           axios
           // .post('https://backendci-disneyparents.herokuapp.com/api/users/register',event)
           .then(response=>{
@@ -36,7 +38,8 @@ const  Settings = (props) => {
               })
               .catch(error =>{
                   console.log(error)
-              })
+              })*/
+
       }
   
           
@@ -134,3 +137,11 @@ const  Settings = (props) => {
           </div>
       )
   };
+
+const mapStateToProps = state => {
+    return {
+        state
+    }
+}
+
+  export default connect(mapStateToProps, {updateUserData})(Settings);

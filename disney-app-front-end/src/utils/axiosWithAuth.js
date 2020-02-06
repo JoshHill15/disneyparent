@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const axiosWithAuth = () => {
   return axios.create({
-    baseURL: 'https://backendci-disneyparents.herokuapp.com',
+    baseURL: 'https://bw-testing.herokuapp.com',
     headers: {
       Authorization: localStorage.getItem('token')
     }

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { push } from 'react-router-redux';
 
@@ -36,8 +35,8 @@ export const MESSAGE_DELETE_FAILURE = 'MESSAGE_DELETE_FAILURE';
 
 export const registerUser = userData => dispatch => {
     dispatch({type: USER_REGISTER_START})
-    axios
-        .get('https://backendci-disneyparents.herokuapp.com/api/auth/register', userData)
+    axiosWithAuth()
+        .post('/api/users/register', userData)
         .then(response => {
             dispatch({type: USER_REGISTER_SUCCESS});
             localStorage.setItem('token', response.data.payload);
@@ -98,16 +97,17 @@ export const postMessage = message => dispatch => {
             dispatch({type: MESSAGE_POST_SUCCESS})
         })
         .catch(error => {
-            dispatch({type: MESSAGE_POST_FAILURE, payload: error.data})
+            dispatch({type: MESSAGE_POST_FAILURE, payload: error})
         })
 }
 
 export const updateMessage = (messageID, newMessage) => dispatch => {
     dispatch({type: MESSAGE_EDIT_START})
+    console.log(newMessage);
     axiosWithAuth()
         .put(`/api/posts/${messageID}`, newMessage)
         .then(response => {
-            response.log(response.data)
+            console.log(response.data)
             dispatch({type: MESSAGE_EDIT_SUCCESS})
         })          
         .catch(error => {
@@ -115,12 +115,13 @@ export const updateMessage = (messageID, newMessage) => dispatch => {
         })
 };
 
-export const deleteMessage = messageID => dispatch => {
+export const deleteMessage = (messageID) => dispatch => {
     dispatch({type: MESSAGE_DELETE_START})
+    console.log(messageID)
     axiosWithAuth()
-        .put(`/api/posts/${messageID}`)
+        .delete(`/api/posts/${messageID}`)
         .then(response => {
-            response.log(response.data)
+            console.log(response.data)
             dispatch({type: MESSAGE_DELETE_SUCCESS})   
         })       
         .catch(error => {
@@ -131,9 +132,9 @@ export const deleteMessage = messageID => dispatch => {
 export const retreiveMessages = () => dispatch => {
     dispatch({type: MESSAGE_RETREIVAL_START})
     axiosWithAuth()
-        .get('/api/users')
+        .get('/api/posts')
         .then(response => {
-            console.log(response)
+            console.log('Get all messages', response)
             dispatch({type: MESSAGE_RETREIVAL_SUCCESS, payload: response.data})
         })
         .catch(error => {

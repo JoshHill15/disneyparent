@@ -1,6 +1,8 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import * as yup from "yup"
+import { connect } from 'react-redux';
+import * as yup from "yup";
+import { postMessage } from '../actions';
 
 
 const postFormSchema = yup.object().shape({
@@ -10,20 +12,25 @@ const postFormSchema = yup.object().shape({
 
 
 const PostForm = (props) =>{
-    const {userData,setShowPostForm, setPosts} = props
+    //const {userData,setShowPostForm, setPosts} = props
     const {register,handleSubmit,errors,reset} = useForm({
         // validationSchema:postFormSchema
     });
 
     // const charCount = 256-document.getElementById("addDesc").length();
     const addPost = event =>{
-        console.log(userData,userData.posts)
+        /*console.log(userData,userData.posts)
         setPosts([...userData.posts, event]);
         console.log(`after` +userData + userData.posts)
-        console.dir(userData.posts)
+        console.dir(userData.posts)*/
+        const message = {
+            title: event.title,
+            contents: event.content
+        }
+        props.postMessage(message);
 
-        reset()
-        setShowPostForm(false);
+        reset();
+        props.setShowPostForm(false);
 
     }
 
@@ -55,4 +62,10 @@ const PostForm = (props) =>{
     )
 }
 
-export default PostForm;
+const mapStateToProps = state => {
+    return {
+        name: state.user.name
+    }
+};
+
+export default connect(mapStateToProps, {postMessage})(PostForm);

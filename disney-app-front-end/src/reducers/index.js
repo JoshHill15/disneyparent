@@ -14,15 +14,15 @@ import  {
     MESSAGE_POST_START,
     MESSAGE_POST_SUCCESS,
     MESSAGE_POST_FAILURE,
-    MESSAGE_RETREIVAL_START,
-    MESSAGE_RETREIVAL_SUCCESS,
-    MESSAGE_RETREIVAL_FAILURE,
     MESSAGE_EDIT_START,
     MESSAGE_EDIT_SUCCESS,
     MESSAGE_EDIT_FAILURE,
     MESSAGE_DELETE_START,
     MESSAGE_DELETE_SUCCESS,
-    MESSAGE_DELETE_FAILURE
+    MESSAGE_DELETE_FAILURE,
+    MESSAGE_RETREIVAL_START,
+    MESSAGE_RETREIVAL_SUCCESS,
+    MESSAGE_RETREIVAL_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -39,7 +39,15 @@ const initialState = {
         noOfChildren:'',
         location:''
     },
-    posts: []
+    posts: [
+        {
+            id: 0,
+            title: 'No Posts',
+            content: 'N/A',
+            postedBy: 'N/A'
+        }
+    ],
+    allPosts: []
 };
 
 export const reducer = (state = initialState, action) => {
@@ -172,8 +180,22 @@ export const reducer = (state = initialState, action) => {
                 error: action.payload
             }
         case MESSAGE_RETREIVAL_START:
-        case MESSAGE_RETREIVAL_SUCCESS: //update posts
+            return {
+                ...state,
+                isLoading: true
+            }
+        case MESSAGE_RETREIVAL_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                allPosts: action.payload
+            }
         case MESSAGE_RETREIVAL_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
         default: 
             return state
     }

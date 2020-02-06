@@ -5,11 +5,9 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import { registerUser } from '../actions';
 
-const Signup = () => {
+const Signup = (props) => {
 
-
-
-  const SignUpSchema = yup.object().shape({
+   /* const SignUpSchema = yup.object().shape({
         userName:yup.string().required(),
         email:yup.string().email().required(),
         password:yup
@@ -24,13 +22,14 @@ const Signup = () => {
 
 
         
-    }) 
-    const{ register, handleSubmit,errors} = useForm({
-        validationSchema: SignUpSchema
+    }) */
+    const{ register, handleSubmit, errors} = useForm({
+        //validationSchema: SignUpSchema
     });
     const createUser = event =>{
-
-        console.log("submitting")
+        console.log(event);
+        props.registerUser(event);
+       /* console.log("submitting")
 
         axios
             // .post('https://backendci-disneyparents.herokuapp.com/api/users/register',event)
@@ -39,7 +38,7 @@ const Signup = () => {
             })
             .catch(error =>{
                 console.log(error)
-            })
+            })*/
     }
 
 
@@ -131,7 +130,7 @@ const Signup = () => {
                 />
                 {errors.phone && <p>{errors.phone.message}</p>}
 
-                <button>Create Account</button>
+                <button type='submit'>Create Account</button>
             </form>
         </div>
     )
@@ -148,4 +147,4 @@ const mapStateToProps = state => {
 
 
 
-export default connect(mapStateToProps, {registerUser})(SignUp);
+export default connect(mapStateToProps, {registerUser})(Signup);
