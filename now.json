@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "name": "disney-app-front-end",
+    "builds": [{ "src": "disney-app-front-end/package.json", "use": "@now/static-build", "config": {"distDir": "build"} }],
+    "routes": [
+        { "src": "/(.*)", "dest": "disney-app-front-end/$1" }
+    ]
+}
