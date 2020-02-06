@@ -33,6 +33,14 @@ export const MESSAGE_DELETE_START = 'MESSAGE_DELETE_START';
 export const MESSAGE_DELETE_SUCCESS = 'MESSAGE_DELETE_SUCCESS';
 export const MESSAGE_DELETE_FAILURE = 'MESSAGE_DELETE_FAILURE';
 
+export const COMMENT_POST_START = 'COMMENT_POST_START';
+export const COMMENT_POST_SUCCESS = 'COMMENT_POST_SUCCESS';
+export const COMMENT_POST_FAILURE = 'COMMENT_POST_FAILURE';
+
+export const MESSAGE_BYID_START = 'MESSAGE_BYID_START';
+export const MESSAGE_BYID_SUCCESS = 'MESSAGE_BYID_SUCCESS';
+export const MESSAGE_BYID_FAILURE = 'MESSAGE_BYID_FAILURE';
+
 export const registerUser = userData => dispatch => {
     dispatch({type: USER_REGISTER_START})
     axiosWithAuth()
@@ -139,5 +147,32 @@ export const retreiveMessages = () => dispatch => {
         })
         .catch(error => {
             dispatch({type: MESSAGE_RETREIVAL_FAILURE, payload: error.data})
+        })
+};
+
+export const postComment = (id, comment) => dispatch => {
+    dispatch({type: COMMENT_POST_START})
+    console.log("Comment", comment)
+    /*axiosWithAuth()
+        .post('/api/posts', comment)
+        .then(response => {
+            console.log(response.data)
+            dispatch({type: COMMENT_POST_SUCCESS})
+        })
+        .catch(error => {
+            dispatch({type: COMMENT_POST_FAILURE, payload: error})
+        })*/
+};
+
+export const retreiveMessageById = (id) => dispatch => {
+    dispatch({type: MESSAGE_BYID_START})
+    axiosWithAuth()
+        .get(`/api/posts/${id}`)
+        .then(response => {
+            console.log('Get by ID', response)
+            dispatch({type: MESSAGE_BYID_SUCCESS, payload: response.data})
+        })
+        .catch(error => {
+            dispatch({type: MESSAGE_BYID_FAILURE, payload: error.data})
         })
 };
