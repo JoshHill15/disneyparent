@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useForm} from "react-hook-form";
 import { connect } from 'react-redux';
 import { updateMessage } from '../actions';
 
@@ -8,14 +7,17 @@ const EditPostForm = (props) =>{
     
     const [newMessage, setNewMessage] = useState({
         title: props.post.title,
-        content: props.post.contents
+        contents: props.post.contents
     });
 
     const handleChanges = e => {
         setNewMessage({[e.target.name] : e.target.value})
+        console.log(e.target.name);
     }
     
-    const addPost = newMessage =>{
+    const addPost = e =>{
+        e.preventDefault();
+        console.log(newMessage);
         props.updateMessage(props.post.id, newMessage);
         props.setShowEditForm(false);
     }
@@ -34,8 +36,8 @@ const EditPostForm = (props) =>{
             <label htmlFor="content">Title
             <input 
                 type="textarea" 
-                name="content"
-                value={newMessage.content}
+                name="contents"
+                value={newMessage.contents}
                 onChange={handleChanges}
             />
             </label>

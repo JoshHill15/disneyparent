@@ -19,7 +19,10 @@ import  {
     MESSAGE_EDIT_FAILURE,
     MESSAGE_DELETE_START,
     MESSAGE_DELETE_SUCCESS,
-    MESSAGE_DELETE_FAILURE
+    MESSAGE_DELETE_FAILURE,
+    MESSAGE_RETREIVAL_START,
+    MESSAGE_RETREIVAL_SUCCESS,
+    MESSAGE_RETREIVAL_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -43,7 +46,8 @@ const initialState = {
             content: 'N/A',
             postedBy: 'N/A'
         }
-    ]
+    ],
+    allPosts: []
 };
 
 export const reducer = (state = initialState, action) => {
@@ -170,6 +174,23 @@ export const reducer = (state = initialState, action) => {
                 isLoading: false
             }
         case MESSAGE_DELETE_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case MESSAGE_RETREIVAL_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case MESSAGE_RETREIVAL_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                allPosts: action.payload
+            }
+        case MESSAGE_RETREIVAL_FAILURE:
             return {
                 ...state,
                 isLoading: false,

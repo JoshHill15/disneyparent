@@ -103,10 +103,11 @@ export const postMessage = message => dispatch => {
 
 export const updateMessage = (messageID, newMessage) => dispatch => {
     dispatch({type: MESSAGE_EDIT_START})
+    console.log(newMessage);
     axiosWithAuth()
         .put(`/api/posts/${messageID}`, newMessage)
         .then(response => {
-            response.log(response.data)
+            console.log(response.data)
             dispatch({type: MESSAGE_EDIT_SUCCESS})
         })          
         .catch(error => {
@@ -131,9 +132,9 @@ export const deleteMessage = (messageID) => dispatch => {
 export const retreiveMessages = () => dispatch => {
     dispatch({type: MESSAGE_RETREIVAL_START})
     axiosWithAuth()
-        .get('/api/users')
+        .get('/api/posts')
         .then(response => {
-            console.log(response)
+            console.log('Get all messages', response)
             dispatch({type: MESSAGE_RETREIVAL_SUCCESS, payload: response.data})
         })
         .catch(error => {
