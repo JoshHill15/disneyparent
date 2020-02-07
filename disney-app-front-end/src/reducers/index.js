@@ -220,6 +220,22 @@ export const reducer = (state = initialState, action) => {
                 isLoading: false,
                 error: action.payload
             }
+        case COMMENT_POST_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case COMMENT_POST_SUCCESS:
+            return {
+                ...state,
+                isLoading: false
+            }
+        case COMMENT_POST_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
         default: 
             return state
     }

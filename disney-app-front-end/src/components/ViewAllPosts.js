@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { retreiveMessages, postComment } from '../actions';
 import Header from './Header';
@@ -9,6 +9,10 @@ const ViewAllPosts = props => {
         props.retreiveMessages();
         
     },[]);
+
+    const sendToComment = id => {
+        props.history.push(`/comment/${id}`)
+    }
 
     
 
@@ -24,7 +28,9 @@ const ViewAllPosts = props => {
                     <h2>{post.title}</h2>
                     <p>{post.contents}</p>
                     <p>Posted by: {post.postedBy}</p>
-                    <button>Reply</button>
+                    <button 
+                        onClick={() => sendToComment(post.id)}>Reply
+                    </button>
                 </div>
                 
                 </>

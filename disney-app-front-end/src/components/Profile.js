@@ -1,6 +1,5 @@
 import React, { useState, useEffect }from "react";
 import Header from "./Header"
-import {useRouteMatch} from "react-router-dom";
 
 import { connect } from 'react-redux';
 import PostForm from "./PostForm";
@@ -83,10 +82,15 @@ const Profile = props => {
     const [showPostForm,setShowPostForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
 
+    const sendToComment = id => {
+        props.history.push(`/comment/${id}`)
+    }
        
     return(
+        <>
+        <Header/>
         <StyledProfile className="profile__info">
-            {/* <Header/> */}
+            
             <h1>Hello {props.name}</h1>
             <div className="edit__post">
                 <button onClick={()=> setShowPostForm(true)}>Add New Post</button>
@@ -101,6 +105,9 @@ const Profile = props => {
                             <p>{post.contents}</p>
                             <p>Posted by: {post.postedBy}</p>
                             <button onClick={() => setShowEditForm(true)}>Edit</button><button onClick={() => props.deleteMessage(post.id)}>Delete</button>
+                            <button 
+                                onClick={() => sendToComment(post.id)}>Reply
+                            </button>
                             <div>{showEditForm?<EditPostForm setShowEditForm={setShowEditForm} post={post}/>:null}</div>
                         </div>
                         
@@ -108,7 +115,7 @@ const Profile = props => {
                 }):<p>No current requests</p>}
                 </div>
         </StyledProfile>
-
+    </>
     )
 
 };
