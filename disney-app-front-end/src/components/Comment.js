@@ -14,6 +14,7 @@ const Comment = props => {
 
     useEffect(()=>{
         props.retreiveMessageById(id);
+        console.log(props.post)
     },[id]);
 
     const onSubmit = e => {
@@ -26,7 +27,7 @@ const Comment = props => {
         <>
         <div className='post-wrapper'>
             <h2>{props.post.title}</h2>
-                <p>{props.post.contents}</p>
+                <p>{props.post.content}</p>
                 <p>Posted by: {props.post.postedBy}</p>
         </div>
         <form onSubmit={onSubmit}>
