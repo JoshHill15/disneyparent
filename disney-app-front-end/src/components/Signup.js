@@ -1,7 +1,7 @@
 import React from "react";
 import {useForm} from "react-hook-form"
 import * as yup from "yup"
-import axios from "axios";
+// import axios from "axios";
 import { connect } from 'react-redux';
 import { registerUser } from '../actions';
 import styled from  "styled-components";
@@ -54,12 +54,12 @@ const StyledWrapper = styled.div`
             & .create__button{
                 height:8vh;
             }
-        
+   
     }
     `;
 const Signup = (props) => {
 
-   /* const SignUpSchema = yup.object().shape({
+   const SignUpSchema = yup.object().shape({
         userName:yup.string().required(),
         email:yup.string().email().required(),
         password:yup
@@ -74,19 +74,17 @@ const Signup = (props) => {
 
 
         
-    }) */
+    }) 
     const{ register, handleSubmit, errors} = useForm({
-        //validationSchema: SignUpSchema
+        validationSchema: SignUpSchema
     });
     const createUser = event =>{
-        console.log(event);
         props.registerUser(event);
-       /* console.log("submitting")
+       /*
 
         axios
             // .post('https://backendci-disneyparents.herokuapp.com/api/users/register',event)
             .then(response=>{
-                console.log(response)
             })
             .catch(error =>{
                 console.log(error)
@@ -186,7 +184,7 @@ const Signup = (props) => {
                 <button className="create__button" type='submit'>Create Account</button>
             </form>
             </div>
-            <div className="right__container"/>
+            <div className="signup__right__container"/>
         </StyledWrapper>
     )
 

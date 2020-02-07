@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.signup__right__container{
+  background: url(./images/signup.svg) no-repeat center center;
+  background-color:#453DB0;
+}

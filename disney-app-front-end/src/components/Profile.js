@@ -1,6 +1,4 @@
 import React, { useState, useEffect }from "react";
-import Header from "./Header"
-import {useRouteMatch} from "react-router-dom";
 
 import { connect } from 'react-redux';
 import PostForm from "./PostForm";
