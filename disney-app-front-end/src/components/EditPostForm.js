@@ -5,17 +5,29 @@ import styled from "styled-components";
 
 
 
-const StyledEdit = styled.div`
+const StyledEdit = styled.form`
 position:absolute;
-right:0;
+left: 0;
 top:5%;
-width:30%;
+width: 100%;
+background-color: white;
     & input{
-        height:5%;
+        font-size: 1rem;
+        line-height: 2.5rem;
+        padding: 0 5%;
+       
     }
-
+   
+    & label {
+        margin: 0 auto 5%;
+    }
+    &  .update__button{
+        width: 7vw !important;
+        margin: 0 3% 0 12% !important;
+    }
 `;
 
+  
 const EditPostForm = (props) =>{
     
     const [newMessage, setNewMessage] = useState({
@@ -36,8 +48,7 @@ const EditPostForm = (props) =>{
     }
 
     return(
-        <StyledEdit>
-        <form onSubmit={addPost}>
+        <StyledEdit onSubmit={addPost}>
             <label htmlFor="title">Title
             <input 
                 type="text" 
@@ -56,9 +67,9 @@ const EditPostForm = (props) =>{
             />
             </label>
 
-            <button>Update Post</button>
-        </form>
-        </StyledEdit>
+            <button className="update__button">Update Post</button>
+            </StyledEdit> 
+    
     )
 }
 
