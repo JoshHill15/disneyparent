@@ -27,7 +27,6 @@ const ViewAllPosts = props => {
                 <div className="post__wrapper" key={post.id}>
                     <h2>{post.title}</h2>
                     <p>{post.contents}</p>
-                    <p>Posted by: {post.postedBy}</p>
                     <button 
                         onClick={() => sendToComment(post.id)}>Reply
                     </button>
