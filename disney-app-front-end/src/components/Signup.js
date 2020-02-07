@@ -1,6 +1,6 @@
 import React from "react";
 import {useForm} from "react-hook-form"
-
+import * as yup from 'yup';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions';
 import styled from  "styled-components";
