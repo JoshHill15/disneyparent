@@ -33,6 +33,18 @@ export const MESSAGE_DELETE_START = 'MESSAGE_DELETE_START';
 export const MESSAGE_DELETE_SUCCESS = 'MESSAGE_DELETE_SUCCESS';
 export const MESSAGE_DELETE_FAILURE = 'MESSAGE_DELETE_FAILURE';
 
+export const COMMENT_POST_START = 'COMMENT_POST_START';
+export const COMMENT_POST_SUCCESS = 'COMMENT_POST_SUCCESS';
+export const COMMENT_POST_FAILURE = 'COMMENT_POST_FAILURE';
+
+export const MESSAGE_BYID_START = 'MESSAGE_BYID_START';
+export const MESSAGE_BYID_SUCCESS = 'MESSAGE_BYID_SUCCESS';
+export const MESSAGE_BYID_FAILURE = 'MESSAGE_BYID_FAILURE';
+
+export const VIEW_REPLY_START = 'VIEW_REPLY_START';
+export const VIEW_REPLY_SUCCESS = 'VIEW_REPLY_SUCCESS';
+export const VIEW_REPLY_FAILURE = 'VIEW_REPLY_FAILURE';
+
 export const registerUser = userData => dispatch => {
     dispatch({type: USER_REGISTER_START})
     axiosWithAuth()
@@ -141,3 +153,43 @@ export const retreiveMessages = () => dispatch => {
             dispatch({type: MESSAGE_RETREIVAL_FAILURE, payload: error.data})
         })
 };
+
+export const postComment = (id, contents) => dispatch => {
+    dispatch({type: COMMENT_POST_START})
+    console.log("Comment", contents);
+    axiosWithAuth()
+        .post(`/api/posts/${id}/comments`, {contents: contents})
+        .then(response => {
+            console.log(response.data)
+            dispatch({type: COMMENT_POST_SUCCESS})
+        })
+        .catch(error => {
+            dispatch({type: COMMENT_POST_FAILURE, payload: error})
+        })
+};
+
+export const retreiveMessageById = (id) => dispatch => {
+    dispatch({type: MESSAGE_BYID_START})
+    axiosWithAuth()
+        .get(`/api/posts/${id}`)
+        .then(response => {
+            //console.log('Get by ID', response)
+            dispatch({type: MESSAGE_BYID_SUCCESS, payload: response.data})
+        })
+        .catch(error => {
+            dispatch({type: MESSAGE_BYID_FAILURE, payload: error.data})
+        })
+};
+
+export const viewReply = id => dispatch => {
+    dispatch({type: VIEW_REPLY_START})
+    axiosWithAuth()
+        .get(`/api/posts/${id}`)
+        .then(response => {
+            console.log('Get Replies', response.data)
+            dispatch({type: VIEW_REPLY_SUCCESS})
+        })
+        .catch(error => {
+            dispatch({type: VIEW_REPLY_FAILURE, payload: error.data})
+        })
+}

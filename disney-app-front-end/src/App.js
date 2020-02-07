@@ -7,6 +7,8 @@ import Profile from "./components/Profile";
 import LoginForm from "./components/LoginForm";
 import PrivateRoute from './components/PrivateRoute';
 import ViewAllPosts from './components/ViewAllPosts';
+import ViewComments from './components/ViewComments';
+import Comment from './components/Comment';
 
 function App() {
     /*const [isAuth, setIsAuth] = useState(false)
@@ -23,7 +25,9 @@ function App() {
           <Route exact path="/">
             <LoginForm />
           </Route>
-          <Route path='/view-all' component={ViewAllPosts} />
+          <PrivateRoute exact path='/view-comments/:id' component={ViewComments} />
+          <PrivateRoute exact path='/comment/:id' component={Comment} />
+          <PrivateRoute exact path='/view-all' component={ViewAllPosts} />
           <PrivateRoute exact path="/profile" component={Profile} />
           <Route path="/signup/" component={Signup}/>
           <Link to="/signup"> <button>Sign Up</button></Link>
