@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 import { retreiveMessageById, postComment } from '../actions';
 
 const Comment = props => {
-    const [comment, setComment] = useState({
-        contents: ''
-    });
+    const [contents, setContents] = useState('');
 
     const { id } = useParams();
 
     const handleChanges = e => {
-        setComment([e.target.name] = e.target.value);
+        setContents(e.target.value);
     };
 
     useEffect(()=>{
@@ -20,26 +18,33 @@ const Comment = props => {
 
     const onSubmit = e => {
         e.preventDefault();
-        props.postComment(id, comment);
+        props.postComment(id, contents);
         props.history.push('/profile');
     }
 
     return (
+        <>
+        <div className='post-wrapper'>
+            <h2>{props.post.title}</h2>
+                <p>{props.post.contents}</p>
+                <p>Posted by: {props.post.postedBy}</p>
+        </div>
         <form onSubmit={onSubmit}>
             <input
                 type='text-area'
                 name='contents'
-                value={comment}
+                value={contents}
                 onChange={handleChanges}
             />    
             <button>Post</button>
         </form>
+        </>
     )
 };
 
 const mapPropsToState = state => {
     return {
-        state
+        post: state.commentPost
     }
 };
 
