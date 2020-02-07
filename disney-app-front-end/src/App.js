@@ -23,7 +23,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path="/login">
+          <Route exact path="/">
             <LoginForm />
           </Route>
           <Route path='/comment/:id' component={Comment} />

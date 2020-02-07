@@ -1,7 +1,20 @@
 import React, {useState} from "react";
 import { connect } from 'react-redux';
 import { updateMessage } from '../actions';
+import styled from "styled-components";
 
+
+
+const StyledEdit = styled.div`
+position:absolute;
+right:0;
+top:5%;
+width:30%;
+    & input{
+        height:5%;
+    }
+
+`;
 
 const EditPostForm = (props) =>{
     
@@ -23,6 +36,7 @@ const EditPostForm = (props) =>{
     }
 
     return(
+        <StyledEdit>
         <form onSubmit={addPost}>
             <label htmlFor="title">Title
             <input 
@@ -44,6 +58,7 @@ const EditPostForm = (props) =>{
 
             <button>Update Post</button>
         </form>
+        </StyledEdit>
     )
 }
 

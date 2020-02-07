@@ -1,14 +1,24 @@
 import React from "react";
 import {useForm} from "react-hook-form";
 import { connect } from 'react-redux';
-import * as yup from "yup";
 import { postMessage } from '../actions';
+import styled from "styled-components";
 
 
-const postFormSchema = yup.object().shape({
-    addTitle:yup.string().required(),
-    addDesc:yup.string().required().max(256,"Your post cannot exceed 256 characters")
-})
+// const postFormSchema = yup.object().shape({
+//     addTitle:yup.string().required(),
+//     addDesc:yup.string().required().max(256,"Your post cannot exceed 256 characters")
+// })
+
+const StyledPost = styled.div`
+margin-top:2%;
+    & button{
+        text-align:center;
+        margin-top:4%;
+    }
+`;
+
+
 
 
 const PostForm = (props) =>{
@@ -35,6 +45,7 @@ const PostForm = (props) =>{
     }
 
     return(
+        <StyledPost>
         <form onSubmit={handleSubmit(addPost)}>
             <label htmlFor="title">Title
             <input 
@@ -46,7 +57,7 @@ const PostForm = (props) =>{
             </label>
             {errors.title && <p>{errors}</p>}
 
-            <label htmlFor="content">Title
+            <label htmlFor="content">content
             <input 
                 type="textarea" 
                 ref={register} 
@@ -55,10 +66,9 @@ const PostForm = (props) =>{
                 />
             </label>
             {errors.content && <p>{errors.content.message}</p>}
-
-            <p>256</p>
             <button>Add Post</button>
         </form>
+        </StyledPost>
     )
 }
 

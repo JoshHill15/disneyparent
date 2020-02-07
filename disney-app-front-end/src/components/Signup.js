@@ -4,7 +4,59 @@ import * as yup from "yup"
 import axios from "axios";
 import { connect } from 'react-redux';
 import { registerUser } from '../actions';
+import styled from  "styled-components";
 
+
+const StyledWrapper = styled.div`
+    display:grid;
+    grid-template-columns:2fr 3fr;
+    & .left__container{
+        height:100vh;
+        font-size:.8rem;
+        grid-template-rows: 5% 95%;
+        grid-template-areas:
+            "... header ..."
+            "... form ...";
+            & h1{
+                grid-area:header;
+            }
+            & form{
+                
+                font-size:1rem;
+                grid-area:form;
+                grid-template-rows:none;
+                grid-template-rows:repeat(15 max-content) 20vh;
+            }
+            & label{
+                font-size:.8rem;
+            }
+            & input{
+                font-size:.8rem;
+                height:3vh;
+                line-height:1rem;
+                width:80%;
+                margin: 0 auto;
+            }
+            & .radio__group{
+                display:grid;
+                grid-template-columns:20% 20% 20% 20% 20%;
+                
+                
+                align-items:center;
+                & p{
+                    display:block;
+                }
+                & label{
+                    width:10%;
+                }
+                
+            }
+            & .create__button{
+                height:8vh;
+            }
+        
+    }
+    `;
 const Signup = (props) => {
 
    /* const SignUpSchema = yup.object().shape({
@@ -43,7 +95,8 @@ const Signup = (props) => {
 
 
     return(
-        <div>
+        <StyledWrapper>
+            <div className="left__container">
             <h1>Join our Family</h1>
             <form onSubmit={handleSubmit(createUser)}>
                 <label htmlFor="userName">Username</label>
@@ -94,7 +147,7 @@ const Signup = (props) => {
                     id="location"
                 />
                 {errors.location && <p>{errors.location.message}</p>}
-
+                <div className="radio__group">
                 <p>Are you a</p>
                 <label htmlFor="parent">Parent</label>
                 <input 
@@ -111,7 +164,7 @@ const Signup = (props) => {
                     id="caregiver"
                 />
                 {errors.role && <p>{errors.role.message}</p>}
-
+                </div>
                 <label htmlFor="numberOfChildren">Number of children</label>
                 <input 
                     type="text" 
@@ -130,9 +183,11 @@ const Signup = (props) => {
                 />
                 {errors.phone && <p>{errors.phone.message}</p>}
 
-                <button type='submit'>Create Account</button>
+                <button className="create__button" type='submit'>Create Account</button>
             </form>
-        </div>
+            </div>
+            <div className="right__container"/>
+        </StyledWrapper>
     )
 
 

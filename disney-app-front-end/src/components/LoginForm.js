@@ -1,11 +1,20 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import { withRouter } from 'react-router-dom';
+import { Link,withRouter } from 'react-router-dom';
 import * as yup from "yup";
 
 //import {DummyData} from "../dummyData"
 import { connect } from 'react-redux';
 import { login } from '../actions';
+import "./login.css";
+import styled from "styled-components";
+
+
+const StyledWrapper = styled.div`
+display:grid;
+grid-template-columns:2fr 3fr;
+height:100vh;
+`;
 
 const LoginSchema = yup.object().shape({
     username: yup.string().required(),
@@ -44,7 +53,9 @@ const LoginForm = (props) => {
     }
 
     return (
-        <div className="loginWrapper">
+        <StyledWrapper className="loginWrapper">
+            <div className="left__container">
+                <div className="logo"/>
         <h1>The Happiest Place on Earth for Everyone</h1>
         <form onSubmit = {handleSubmit(onSubmit)}>
             <label htmlFor="username">Username
@@ -65,7 +76,10 @@ const LoginForm = (props) => {
             </label>
             <button>Sign In</button>
         </form>
+         <button className="signup__button"><Link to="/signup">Sign Up</Link></button>
         </div>
+        <div className="right__container"/>
+        </StyledWrapper>
 
     );
 };
