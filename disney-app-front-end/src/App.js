@@ -20,7 +20,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path="/login">
+          <Route exact path="/">
             <LoginForm />
           </Route>
           <Route path='/view-all' component={ViewAllPosts} />
