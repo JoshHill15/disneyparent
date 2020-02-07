@@ -150,18 +150,18 @@ export const retreiveMessages = () => dispatch => {
         })
 };
 
-export const postComment = (id, comment) => dispatch => {
+export const postComment = (id, contents) => dispatch => {
     dispatch({type: COMMENT_POST_START})
-    console.log("Comment", comment)
-    /*axiosWithAuth()
-        .post('/api/posts', comment)
+    console.log("Comment", contents)
+    axiosWithAuth()
+        .post(`/api/posts/${id}/comments`, contents)
         .then(response => {
             console.log(response.data)
             dispatch({type: COMMENT_POST_SUCCESS})
         })
         .catch(error => {
             dispatch({type: COMMENT_POST_FAILURE, payload: error})
-        })*/
+        })
 };
 
 export const retreiveMessageById = (id) => dispatch => {
@@ -169,7 +169,7 @@ export const retreiveMessageById = (id) => dispatch => {
     axiosWithAuth()
         .get(`/api/posts/${id}`)
         .then(response => {
-            console.log('Get by ID', response)
+            //console.log('Get by ID', response)
             dispatch({type: MESSAGE_BYID_SUCCESS, payload: response.data})
         })
         .catch(error => {
