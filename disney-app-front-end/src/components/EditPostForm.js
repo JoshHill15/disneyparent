@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { connect } from 'react-redux';
-import { updateMessage } from '../actions';
+import { updateMessage, getUserData } from '../actions';
 import styled from "styled-components";
 
 
@@ -27,49 +27,48 @@ background-color: white;
     }
 `;
 
-  
-const EditPostForm = (props) =>{
-    
+
+const EditPostForm = (props) => {
+
     const [newMessage, setNewMessage] = useState({
         title: props.post.title,
         contents: props.post.contents
     });
 
     const handleChanges = e => {
-        setNewMessage({[e.target.name] : e.target.value})
+        setNewMessage({ [e.target.name]: e.target.value })
         console.log(e.target.name);
     }
-    
-    const addPost = e =>{
+
+    const addPost = e => {
         e.preventDefault();
-        console.log(newMessage);
         props.updateMessage(props.post.id, newMessage);
         props.setShowEditForm(false);
     }
 
-    return(
+    return (
         <StyledEdit onSubmit={addPost}>
             <label htmlFor="title">Title
-            <input 
-                type="text" 
-                name="title"
-                value={newMessage.title}
-                onChange={handleChanges}
-            />
+            <input
+                    type="text"
+                    name="title"
+                    value={newMessage.title}
+                    onChange={handleChanges}
+                />
             </label>
 
             <label htmlFor="content">Title
-            <input 
-                type="textarea" 
-                name="contents"
-                value={newMessage.contents}
-                onChange={handleChanges}
-            />
+            <input
+                    type="textarea"
+                    name="contents"
+                    value={newMessage.contents}
+                    onChange={handleChanges}
+                />
             </label>
 
             <button className="update__button">Update Post</button>
-            </StyledEdit> 
-    
+        </StyledEdit>
+
     )
 }
 
@@ -79,4 +78,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {updateMessage})(EditPostForm);
+export default connect(mapStateToProps, { updateMessage })(EditPostForm);

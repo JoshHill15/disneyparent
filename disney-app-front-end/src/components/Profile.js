@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header"
 
 import { connect } from 'react-redux';
@@ -73,49 +73,55 @@ grid-template-areas:
 
 const Profile = props => {
     //const [posts,setPosts] = useState(user.posts);
+    console.log("props", props)
 
-     useEffect(() => {
-        props.getUserData();
-    },[]);
-
-   
-    const [showPostForm,setShowPostForm] = useState(false);
+    const [showPostForm, setShowPostForm] = useState(false);
     const [showEditForm, setShowEditForm] = useState(false);
+
+    useEffect(() => {
+        console.log("lfjd")
+        props.getUserData();
+    }, [showPostForm, showEditForm]);
+
+
 
     const sendToComment = id => {
         props.history.push(`/comment/${id}`)
     }
-       
-    return(
+
+    return (
         <>
-        <Header/>
-        <StyledProfile className="profile__info">
-            
-            <h1>Hello {props.name}</h1>
-            <div className="edit__post">
-                <button onClick={()=> setShowPostForm(true)}>Add New Post</button>
-                {showPostForm?<PostForm setShowPostForm={setShowPostForm}/>:null}     
-            </div>               
-            <div className="post__container">    
-                {props.posts?props.posts.map(post =>{
-                    return(
-                        
-                        <div className="post__wrapper">
-                            <h2>{post.title}</h2>
-                            <p>{post.contents}</p>
-                            <p>Posted by: {post.postedBy}</p>
-                            <button onClick={() => setShowEditForm(true)}>Edit</button><button onClick={() => props.deleteMessage(post.id)}>Delete</button>
-                            <button 
-                                onClick={() => sendToComment(post.id)}>Reply
-                            </button>
-                            <div>{showEditForm?<EditPostForm setShowEditForm={setShowEditForm} post={post}/>:null}</div>
-                        </div>
-                        
-                    )
-                }):<p>No current requests</p>}
+            <Header />
+            <StyledProfile className="profile__info">
+
+                <h1>Hello {props.name}</h1>
+                <div className="edit__post">
+                    <button onClick={() => setShowPostForm(true)}>Add New Post</button>
+                    {showPostForm ? <PostForm setShowPostForm={setShowPostForm} posts={props.posts} /> : null}
                 </div>
-        </StyledProfile>
-    </>
+                <div className="post__container">
+                    {props.posts ? props.posts.map((post, i) => {
+                        return (
+
+                            <div className="post__wrapper">
+                                <h2>{post.title}</h2>
+                                <p>{post.contents}</p>
+                                <p>Posted by: {post.postedBy}</p>
+                                <button onClick={(e) => {
+                                    setShowEditForm(true)
+                                    e.stopPropagation()
+                                }}>Edit</button><button onClick={() => props.deleteMessage(post.id)}>Delete</button>
+                                <button
+                                    onClick={() => sendToComment(post.id)}>Reply
+                            </button>
+                                <div>{showEditForm ? <EditPostForm setShowEditForm={setShowEditForm} post={post} /> : null}</div>
+                            </div>
+
+                        )
+                    }) : <p>No current requests</p>}
+                </div>
+            </StyledProfile>
+        </>
     )
 
 };
@@ -127,4 +133,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {getUserData, deleteMessage})(Profile);
+export default connect(mapStateToProps, { getUserData, deleteMessage })(Profile);
